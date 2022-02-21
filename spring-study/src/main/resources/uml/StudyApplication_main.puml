@@ -1,0 +1,42 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> StudyApplication : main
+activate StudyApplication
+StudyApplication -> ClassPathXmlApplicationContext : new
+activate ClassPathXmlApplicationContext
+ClassPathXmlApplicationContext --> StudyApplication
+deactivate ClassPathXmlApplicationContext
+StudyApplication -> BeanFactory : getBean
+activate BeanFactory
+BeanFactory --> StudyApplication
+deactivate BeanFactory
+StudyApplication -> User : new
+activate User
+User --> StudyApplication
+deactivate User
+StudyApplication -> UserService : addUser
+activate UserService
+UserService --> StudyApplication
+deactivate UserService
+return
+@enduml

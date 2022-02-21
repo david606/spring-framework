@@ -1,0 +1,42 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> ClassPathXmlApplicationContext : new
+activate ClassPathXmlApplicationContext
+ClassPathXmlApplicationContext -> ClassPathXmlApplicationContext : new
+activate ClassPathXmlApplicationContext
+ClassPathXmlApplicationContext -> AbstractXmlApplicationContext : new
+activate AbstractXmlApplicationContext
+AbstractXmlApplicationContext --> ClassPathXmlApplicationContext
+deactivate AbstractXmlApplicationContext
+ClassPathXmlApplicationContext -> AbstractRefreshableConfigApplicationContext : setConfigLocations
+activate AbstractRefreshableConfigApplicationContext
+AbstractRefreshableConfigApplicationContext --> ClassPathXmlApplicationContext
+deactivate AbstractRefreshableConfigApplicationContext
+ClassPathXmlApplicationContext -> AbstractApplicationContext : refresh
+activate AbstractApplicationContext
+AbstractApplicationContext --> ClassPathXmlApplicationContext
+deactivate AbstractApplicationContext
+ClassPathXmlApplicationContext --> ClassPathXmlApplicationContext
+deactivate ClassPathXmlApplicationContext
+return
+@enduml

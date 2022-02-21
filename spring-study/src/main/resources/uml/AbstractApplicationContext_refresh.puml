@@ -1,0 +1,110 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> AbstractApplicationContext : refresh
+activate AbstractApplicationContext
+AbstractApplicationContext -> ApplicationStartup : start
+activate ApplicationStartup
+ApplicationStartup --> AbstractApplicationContext
+deactivate ApplicationStartup
+AbstractApplicationContext -> AbstractApplicationContext : prepareRefresh
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : obtainFreshBeanFactory
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : prepareBeanFactory
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : postProcessBeanFactory
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> ApplicationStartup : start
+activate ApplicationStartup
+ApplicationStartup --> AbstractApplicationContext
+deactivate ApplicationStartup
+AbstractApplicationContext -> AbstractApplicationContext : invokeBeanFactoryPostProcessors
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : registerBeanPostProcessors
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> StartupStep : end
+activate StartupStep
+StartupStep --> AbstractApplicationContext
+deactivate StartupStep
+AbstractApplicationContext -> AbstractApplicationContext : initMessageSource
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : initApplicationEventMulticaster
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : onRefresh
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : registerListeners
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : finishBeanFactoryInitialization
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : finishRefresh
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> Log : isWarnEnabled
+activate Log
+Log --> AbstractApplicationContext
+deactivate Log
+AbstractApplicationContext -> Log : warn
+activate Log
+Log --> AbstractApplicationContext
+deactivate Log
+AbstractApplicationContext -> AbstractApplicationContext : destroyBeans
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : cancelRefresh
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : resetCommonCaches
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> StartupStep : end
+activate StartupStep
+StartupStep --> AbstractApplicationContext
+deactivate StartupStep
+return
+@enduml

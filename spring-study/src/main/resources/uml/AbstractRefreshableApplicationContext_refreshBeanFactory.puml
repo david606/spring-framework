@@ -1,0 +1,68 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> AbstractRefreshableApplicationContext : refreshBeanFactory
+group hasBeanFactory [确定此上下文当前是否拥有 bean 工厂，即至少已刷新一次且尚未关闭]
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext -> AbstractRefreshableApplicationContext : hasBeanFactory
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext -> AbstractApplicationContext : destroyBeans
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractApplicationContext
+AbstractRefreshableApplicationContext -> AbstractRefreshableApplicationContext : closeBeanFactory
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractRefreshableApplicationContext
+end
+AbstractRefreshableApplicationContext -> AbstractRefreshableApplicationContext : createBeanFactory
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext -> AbstractApplicationContext : getId
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractApplicationContext
+AbstractRefreshableApplicationContext -> DefaultListableBeanFactory : setSerializationId
+activate DefaultListableBeanFactory
+DefaultListableBeanFactory --> AbstractRefreshableApplicationContext
+deactivate DefaultListableBeanFactory
+AbstractRefreshableApplicationContext -> AbstractRefreshableApplicationContext : customizeBeanFactory
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext -> AbstractRefreshableApplicationContext : loadBeanDefinitions
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext -> AbstractApplicationContext : getDisplayName
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractRefreshableApplicationContext
+deactivate AbstractApplicationContext
+AbstractRefreshableApplicationContext -> ApplicationContextException : new
+activate ApplicationContextException
+ApplicationContextException --> AbstractRefreshableApplicationContext
+deactivate ApplicationContextException
+return
+@enduml

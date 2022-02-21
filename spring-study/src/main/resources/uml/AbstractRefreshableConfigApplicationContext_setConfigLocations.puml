@@ -1,0 +1,58 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> AbstractRefreshableConfigApplicationContext : setConfigLocations
+activate AbstractRefreshableConfigApplicationContext
+AbstractRefreshableConfigApplicationContext -> Assert : noNullElements
+activate Assert
+Assert -> IllegalArgumentException : new
+activate IllegalArgumentException
+IllegalArgumentException --> Assert
+deactivate IllegalArgumentException
+Assert --> AbstractRefreshableConfigApplicationContext
+deactivate Assert
+AbstractRefreshableConfigApplicationContext -> AbstractRefreshableConfigApplicationContext : resolvePath
+activate AbstractRefreshableConfigApplicationContext
+AbstractRefreshableConfigApplicationContext -> AbstractApplicationContext : getEnvironment
+activate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : createEnvironment
+activate AbstractApplicationContext
+AbstractApplicationContext -> StandardEnvironment : new
+activate StandardEnvironment
+StandardEnvironment --> AbstractApplicationContext
+deactivate StandardEnvironment
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext --> AbstractRefreshableConfigApplicationContext
+deactivate AbstractApplicationContext
+AbstractRefreshableConfigApplicationContext -> PropertyResolver : resolveRequiredPlaceholders
+activate PropertyResolver
+PropertyResolver --> AbstractRefreshableConfigApplicationContext
+deactivate PropertyResolver
+AbstractRefreshableConfigApplicationContext --> AbstractRefreshableConfigApplicationContext
+deactivate AbstractRefreshableConfigApplicationContext
+AbstractRefreshableConfigApplicationContext -> String : trim
+activate String
+String --> AbstractRefreshableConfigApplicationContext
+deactivate String
+return
+@enduml

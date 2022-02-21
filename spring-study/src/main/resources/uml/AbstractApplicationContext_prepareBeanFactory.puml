@@ -1,0 +1,126 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> AbstractApplicationContext : prepareBeanFactory
+activate AbstractApplicationContext
+AbstractApplicationContext -> ConfigurableBeanFactory : addPropertyEditorRegistrar
+activate ConfigurableBeanFactory
+ConfigurableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableBeanFactory
+AbstractApplicationContext -> ConfigurableBeanFactory : addBeanPostProcessor(new ApplicationContextAwareProcessor(this))
+activate ConfigurableBeanFactory
+ConfigurableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(EnvironmentAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(EmbeddedValueResolverAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(ResourceLoaderAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(ApplicationEventPublisherAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(MessageSourceAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(ApplicationContextAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : ignoreDependencyInterface(ApplicationStartupAware.class)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : registerResolvableDependency(BeanFactory.class, beanFactory)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : registerResolvableDependency(ResourceLoader.class, this)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : registerResolvableDependency(ApplicationEventPublisher.class, this)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableListableBeanFactory : registerResolvableDependency(ApplicationContext.class, this)
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableListableBeanFactory
+AbstractApplicationContext -> ConfigurableBeanFactory : addBeanPostProcessor(new ApplicationListenerDetector(this))
+activate ConfigurableBeanFactory
+ConfigurableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableBeanFactory
+AbstractApplicationContext -> NativeDetector : inNativeImage
+activate NativeDetector
+NativeDetector --> AbstractApplicationContext
+deactivate NativeDetector
+AbstractApplicationContext -> BeanFactory : containsBean
+activate BeanFactory
+BeanFactory --> AbstractApplicationContext
+deactivate BeanFactory
+AbstractApplicationContext -> ConfigurableBeanFactory : addBeanPostProcessor(new LoadTimeWeaverAwareProcessor(beanFactory))
+activate ConfigurableBeanFactory
+ConfigurableBeanFactory --> AbstractApplicationContext
+deactivate ConfigurableBeanFactory
+AbstractApplicationContext -> HierarchicalBeanFactory :containsLocalBean(ENVIRONMENT_BEAN_NAME)
+activate HierarchicalBeanFactory
+HierarchicalBeanFactory --> AbstractApplicationContext
+deactivate HierarchicalBeanFactory
+AbstractApplicationContext -> SingletonBeanRegistry : registerSingleton(ENVIRONMENT_BEAN_NAME, getEnvironment())
+activate SingletonBeanRegistry
+SingletonBeanRegistry --> AbstractApplicationContext
+deactivate SingletonBeanRegistry
+AbstractApplicationContext -> HierarchicalBeanFactory : containsLocalBean(SYSTEM_PROPERTIES_BEAN_NAME)
+activate HierarchicalBeanFactory
+HierarchicalBeanFactory --> AbstractApplicationContext
+deactivate HierarchicalBeanFactory
+AbstractApplicationContext -> SingletonBeanRegistry : registerSingleton(SYSTEM_PROPERTIES_BEAN_NAME, getEnvironment().getSystemProperties())
+activate SingletonBeanRegistry
+SingletonBeanRegistry --> AbstractApplicationContext
+deactivate SingletonBeanRegistry
+AbstractApplicationContext -> HierarchicalBeanFactory : containsLocalBean(SYSTEM_ENVIRONMENT_BEAN_NAME)
+activate HierarchicalBeanFactory
+HierarchicalBeanFactory --> AbstractApplicationContext
+deactivate HierarchicalBeanFactory
+AbstractApplicationContext -> SingletonBeanRegistry : registerSingleton(SYSTEM_ENVIRONMENT_BEAN_NAME, getEnvironment().getSystemEnvironment())
+activate SingletonBeanRegistry
+SingletonBeanRegistry --> AbstractApplicationContext
+deactivate SingletonBeanRegistry
+AbstractApplicationContext -> HierarchicalBeanFactory : containsLocalBean(APPLICATION_STARTUP_BEAN_NAME)
+activate HierarchicalBeanFactory
+HierarchicalBeanFactory --> AbstractApplicationContext
+deactivate HierarchicalBeanFactory
+AbstractApplicationContext -> SingletonBeanRegistry : registerSingleton(APPLICATION_STARTUP_BEAN_NAME, getApplicationStartup())
+activate SingletonBeanRegistry
+SingletonBeanRegistry --> AbstractApplicationContext
+deactivate SingletonBeanRegistry
+return
+@enduml

@@ -1,25 +1,22 @@
 package org.david.study;
 
-import org.david.study.config.AppConfig;
 import org.david.study.model.User;
 import org.david.study.service.UserService;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 /**
  * @author david
  */
 public class StudyApplication {
 	public static void main(String[] args) {
-		ApplicationContext context = null;
-//		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-//		UserService userService = context.getBean(UserService.class);
-//		userService.addUser(new User(0L,"David"));
-
-		context = new ClassPathXmlApplicationContext("application.xml");
-		User user = context.getBean(User.class);
-		System.out.println("user = " + user);
+		ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+		GenericApplicationContext genericApplicationContext= new GenericApplicationContext();
+		new XmlBeanDefinitionReader(genericApplicationContext).loadBeanDefinitions("services.xml","daos.xml");
+		genericApplicationContext.refresh();
+		UserService userService = context.getBean("userService", UserService.class);
+		userService.addUser(new User(1L, "David"));
 	}
 }

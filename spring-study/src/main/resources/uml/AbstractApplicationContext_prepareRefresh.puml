@@ -1,0 +1,98 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+participant Actor
+Actor -> AbstractApplicationContext : prepareRefresh
+activate AbstractApplicationContext
+AbstractApplicationContext -> System : currentTimeMillis
+activate System
+System --> AbstractApplicationContext
+deactivate System
+AbstractApplicationContext -> AtomicBoolean : set
+Note over AtomicBoolean: this.closed.set(false);
+activate AtomicBoolean
+AtomicBoolean --> AbstractApplicationContext
+deactivate AtomicBoolean
+AbstractApplicationContext -> AtomicBoolean : set
+Note over AtomicBoolean: this.active.set(true);
+activate AtomicBoolean
+AtomicBoolean --> AbstractApplicationContext
+deactivate AtomicBoolean
+AbstractApplicationContext -> Log : isDebugEnabled
+activate Log
+Log --> AbstractApplicationContext
+deactivate Log
+AbstractApplicationContext -> Log : isTraceEnabled
+activate Log
+Log --> AbstractApplicationContext
+deactivate Log
+AbstractApplicationContext -> Log : trace
+activate Log
+Log --> AbstractApplicationContext
+deactivate Log
+AbstractApplicationContext -> AbstractApplicationContext : getDisplayName
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> Log : debug
+activate Log
+Log --> AbstractApplicationContext
+deactivate Log
+AbstractApplicationContext -> AbstractApplicationContext : initPropertySources
+activate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : getEnvironment
+activate AbstractApplicationContext
+AbstractApplicationContext -> AbstractApplicationContext : createEnvironment
+activate AbstractApplicationContext
+AbstractApplicationContext -> StandardEnvironment : new
+activate StandardEnvironment
+StandardEnvironment --> AbstractApplicationContext
+deactivate StandardEnvironment
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext --> AbstractApplicationContext
+deactivate AbstractApplicationContext
+AbstractApplicationContext -> ConfigurablePropertyResolver : validateRequiredProperties
+activate ConfigurablePropertyResolver
+ConfigurablePropertyResolver --> AbstractApplicationContext
+deactivate ConfigurablePropertyResolver
+note over System, ConfigurablePropertyResolver : this.earlyApplicationListeners
+AbstractApplicationContext -> LinkedHashSet : new
+activate LinkedHashSet
+LinkedHashSet --> AbstractApplicationContext
+deactivate LinkedHashSet
+AbstractApplicationContext -> Set : clear
+activate Set
+Set --> AbstractApplicationContext
+deactivate Set
+AbstractApplicationContext -> Set : addAll
+activate Set
+Set --> AbstractApplicationContext
+deactivate Set
+note over System, ConfigurablePropertyResolver : this.earlyApplicationEvents
+AbstractApplicationContext -> LinkedHashSet : new
+activate LinkedHashSet
+LinkedHashSet --> AbstractApplicationContext
+deactivate LinkedHashSet
+return
+@enduml
